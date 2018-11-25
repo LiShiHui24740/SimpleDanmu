@@ -49,8 +49,8 @@ simpleDanmuView.addInMessageQueue(testMessage);
 ```
 # 高级用法
 你可以自定义自己的弹幕容器和弹幕中的子View，弹幕容器需要继承SimpleBaseDanmuView，重写startItemDanmuView方法，弹幕子View需要继承SimpleItemBaseView，从而实现自己需要的动画效果，例如实现花椒直播欢迎条效果：
-```
 //自定义弹幕容器View
+```
 public class SimpleWelcomeView extends SimpleBaseDanmuView {
     private Handler mHandler;
 
@@ -175,7 +175,7 @@ public class SimpleWelcomeView extends SimpleBaseDanmuView {
 }
 
 ```
-//自定义弹幕子View：
+//自定义弹幕子View（花椒的子View也有动画实现：左上角高光闪动的星星，还有扫过整个欢迎条的高光条）：
 ```
 public class SimpleItemWelcomeView extends SimpleItemBaseView {
 
@@ -293,3 +293,4 @@ simpleWelcomeView.setMessageAdapter(new ISimpleMessageAdapter<TestMessage>() {
 ```
 # 注意点
 继承SimpleBaseDanmuView的弹幕容器view除了重写startItemDanmuView（）开始动画，还需要在动画结束时候调用endItemDanmuView（）。弹幕显示下一条的时机问题，例如，只有当前一个弹幕完全进入屏幕，后一个弹幕才能进来，再或者说只有当前一个欢迎条完全离开屏幕后，下一个才能进来。这个时机是由使用者定，只需在可以显示下一个弹幕的时候调用setNextIndicator(simpleItemBaseView.rowNumber, true);在不调用的情况下默认是一条弹幕结束后下一个才会开始。
+
