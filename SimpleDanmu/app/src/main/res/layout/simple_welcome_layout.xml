@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="30dp"
+    >
+
+    <ImageView
+        android:id="@+id/id_img_welcome_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/live_welcome_stripv7"
+        android:scaleType="fitXY"
+        />
+
+    <ImageView
+        android:id="@+id/id_civ_welcome_headpic"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="1.5dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/public_icon_userhead"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/id_img_welcome_user_level"
+        android:layout_width="20dp"
+        android:layout_height="10dp"
+        android:layout_alignBottom="@id/id_civ_welcome_headpic"
+        android:layout_alignRight="@id/id_civ_welcome_headpic"
+        android:src="@drawable/ml_icon_lm0" />
+
+    <TextView
+        android:id="@+id/id_tv_welcome_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/id_civ_welcome_headpic"
+        android:ellipsize="end"
+        android:maxEms="5"
+        android:singleLine="true"
+        android:text="李木子"
+        android:textColor="#79F2EC"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/id_tv_welcome_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/id_tv_welcome_name"
+        android:text="，进入了直播间！"
+        android:textColor="#79F2EC"
+        android:textSize="12sp" />
+
+
+    <ImageView
+        android:id="@+id/id_iv_welcome_light"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/live_welcome_light"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/id_iv_welcome_line"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="35dp"
+        android:background="@drawable/live_welcome_striplight"
+        android:visibility="invisible"
+        />
+</RelativeLayout>

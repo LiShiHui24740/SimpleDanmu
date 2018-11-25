@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+
+        abortOnError false
+
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+}
+
+publish {
+
+    userOrg = 'lsh24740'//bintray.com用户名
+
+    groupId = 'com.github.airland'//jcenter上的路径
+
+    artifactId = 'simpledanmu'//项目名称
+
+    publishVersion = '1.0.2'//版本号
+
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+
+    website = 'https://github.com/LiShiHui24740/SimpleDanmu'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+
+    repoName = 'maven'//bintray中创建的repo名称
+
+}
+

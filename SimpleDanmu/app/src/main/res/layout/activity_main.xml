@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_fl_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/id_danmu"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:background="#FF0000"
+        android:gravity="center"
+        android:text="send_danmu"
+        />
+
+    <TextView
+        android:id="@+id/id_welcome"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:layout_toRightOf="@id/id_danmu"
+        android:layout_marginLeft="10dp"
+        android:background="#FF0000"
+        android:gravity="center"
+        android:text="send_welcome" />
+
+    <com.airland.simpledanmuku.widget.SimpleDanmuView
+        android:id="@+id/id_sd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true" />
+
+    <com.airland.datastruct.SimpleWelcomeView
+        android:id="@+id/id_sw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_sd" />
+</RelativeLayout>

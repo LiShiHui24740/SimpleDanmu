@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <com.airland.simpledanmuku.widget.SimpleCircleImageView
+        android:id="@+id/id_civ_headpic"
+        android:layout_width="38dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/header" />
+    <TextView
+        android:id="@+id/id_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/id_civ_headpic"
+        android:layout_alignTop="@id/id_civ_headpic"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="5dp"
+        android:textSize="12sp"
+        android:text="李木子"
+        />
+    <ImageView
+        android:id="@+id/id_iv_vip"
+        android:layout_width="16dp"
+        android:layout_height="10dp"
+        android:layout_alignTop="@id/id_tv_name"
+        android:layout_alignBottom="@id/id_tv_name"
+        android:layout_toRightOf="@id/id_tv_name"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ml_icon_lm0"
+        />
+    <TextView
+        android:id="@+id/id_tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/id_civ_headpic"
+        android:layout_alignBottom="@id/id_civ_headpic"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="5dp"
+        android:textSize="14sp"
+        android:singleLine="true"
+        android:maxEms="20"
+        android:text="主播你好漂亮，像我妹妹"
+        />
+</merge>
