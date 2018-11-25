@@ -2,7 +2,10 @@
 简单弹幕库，先看一下效果:  
 
 
-![image](https://github.com/LiShiHui24740/SimpleDanmu/blob/master/SimpleDanmu/app/Untitled.gif)    
+![image](https://github.com/LiShiHui24740/SimpleDanmu/blob/master/SimpleDanmu/app/Untitled.gif)   
+
+该库主要是控制消息队列，当将消息添加进队列后，何时触发弹幕，如果来一个消息就触发一条弹幕可能会出现弹幕重叠，不合产品需要，例如直播间送特效礼物的时候，不能来一个特效礼物就播放一个，而是要保证前一个播放完成，才能进行下一个。等等诸如此类的场景很多
+
 使用方法:  
 
 ```
