@@ -30,7 +30,7 @@ compile 'com.github.airland:simpledanmu:1.0.2'
 
             @Override
             public SimpleItemBaseView getView(TestMessage testMessage) {
-                //弹幕view，该
+                //弹幕view
                 SimpleItemPictureView simpleItemPictureView = new SimpleItemPictureView(MainActivity.this);
                 simpleItemPictureView.getContentView().setText(testMessage.getContent());
                 return simpleItemPictureView;
