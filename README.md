@@ -50,7 +50,7 @@ protected void onDestroy() {
 ```
 simpleDanmuView.addInMessageQueue(testMessage);
 ```
-# 高级用法
+# 自定义效果
 你可以自定义自己的弹幕容器和弹幕中的子View，弹幕容器需要继承SimpleBaseDanmuView，重写startItemDanmuView方法，弹幕子View需要继承SimpleItemBaseView，从而实现自己需要的动画效果，例如实现花椒直播欢迎条效果：
 //自定义弹幕容器View
 ```
