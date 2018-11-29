@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         welcome = findViewById(R.id.id_welcome);
 
         simpleDanmuView = findViewById(R.id.id_sd);
-        simpleWelcomeView = findViewById(R.id.id_sw);
+         simpleWelcomeView = findViewById(R.id.id_sw);
 
         simpleDanmuView.setMessageAdapter(new ISimpleMessageAdapter<TestMessage>() {
             @Override

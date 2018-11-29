@@ -19,6 +19,7 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
     private boolean fromUp2Down = true;
     private int speed;
     private long itemDuration;
+    private boolean oneByOneEnter = true;
     private Handler mHandler;
 
     public SimpleDanmuView(@NonNull Context context) {
@@ -86,7 +87,7 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
         long scroll_duration;
         if (speed != 0) {
             scroll_duration = (long) (((width + startMargin) * 1.0f / speed) * 1000 + 0.5f);
-        }else{
+        } else {
             scroll_duration = itemDuration;
         }
         valueAnimator.setDuration(scroll_duration);
@@ -97,9 +98,11 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
                 if (currentState == RUNNING) {
                     int value = (int) animation.getAnimatedValue();
                     simpleItemBaseView.setTranslationX(value);
-                    if ((value <= getMeasuredWidth() - simpleItemBaseView.getWidth() - itemDistance) && simpleItemBaseView.getTag() == null) {
-                        setNextIndicator(simpleItemBaseView.rowNumber, true);
-                        simpleItemBaseView.setTag(true);
+                    if (oneByOneEnter) {
+                        if ((value <= getMeasuredWidth() - simpleItemBaseView.getWidth() - itemDistance) && simpleItemBaseView.getTag() == null) {
+                            setNextIndicator(simpleItemBaseView.rowNumber, true);
+                            simpleItemBaseView.setTag(true);
+                        }
                     }
                     if (animation.getAnimatedFraction() == 1) {
                         removeView(simpleItemBaseView);
@@ -115,8 +118,17 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
 
     }
 
+    public void setOneByOneEnter(boolean oneByOneEnter) {
+        this.oneByOneEnter = oneByOneEnter;
+    }
+
+
     public void setRowDistance(int rowDistance) {
-        this.rowDistance = rowDistance;
+        if (this.rowDistance != rowDistance) {
+            this.rowDistance = rowDistance;
+            requestLayout();
+        }
+
     }
 
     public void setFromUp2Down(boolean fromUp2Down) {
