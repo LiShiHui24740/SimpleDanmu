@@ -51,8 +51,10 @@ protected void onDestroy() {
 simpleDanmuView.addInMessageQueue(testMessage);
 ```
 # 自定义效果
-你可以自定义自己的弹幕容器和弹幕中的子View，弹幕容器需要继承SimpleBaseDanmuView，重写startItemDanmuView方法，弹幕子View需要继承SimpleItemBaseView，从而实现自己需要的动画效果，例如实现花椒直播欢迎条效果：
-//自定义弹幕容器View
+自定义效果分为：自定义ItemView和ContainerView,如果你需要的是上面的弹幕滚动效果，只需要定义自己的ItemView即可，ContainerView可以使用SimpleDanmuView，如果你需要定义自己的滚动方式可以自定义ContainerView。
+你可以自定义自己的ContainerView和弹幕中的ItemView，ContainerView需要继承SimpleBaseDanmuView，重写startItemDanmuView方法，ItemView需要继承SimpleItemBaseView，从而实现自己需要的动画效果，例如上方Gif图中，实现花椒直播欢迎条效果：
+以下是一个例子
+//自定义ContainerView
 ```
 public class SimpleWelcomeView extends SimpleBaseDanmuView {
     private Handler mHandler;
@@ -178,7 +180,7 @@ public class SimpleWelcomeView extends SimpleBaseDanmuView {
 }
 
 ```
-//自定义弹幕子View（花椒的子View也有动画实现：左上角高光闪动的星星，还有扫过整个欢迎条的高光条）：
+//自定义ItemView（花椒的子View也有动画实现：左上角高光闪动的星星，还有扫过整个欢迎条的高光条）：
 ```
 public class SimpleItemWelcomeView extends SimpleItemBaseView {
 
