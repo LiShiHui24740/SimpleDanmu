@@ -141,6 +141,7 @@ public class MessageManager<T extends AbstractMessage> {
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    if (currentlock.isLocked())
                     currentlock.unlock();
                 }
             }
