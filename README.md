@@ -11,7 +11,7 @@
 ```
 //先在gradle中添加依赖  
 
-compile 'com.github.airland:simpledanmu:1.0.3'
+compile 'com.github.airland:simpledanmu:1.0.5'
 ```
 接着布局文件中：   
 ```
