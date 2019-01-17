@@ -118,7 +118,7 @@ public abstract class SimpleBaseDanmuView extends FrameLayout implements ISimple
 
     @Override
     public int getState() {
-        return RUNNING;
+        return currentState;
     }
 
     public void setEnableOverLayer(boolean enableOverLayer) {

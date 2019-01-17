@@ -42,7 +42,7 @@ publish {
 
     artifactId = 'simpledanmu'//项目名称
 
-    publishVersion = '1.0.4'//版本号
+    publishVersion = '1.0.5'//版本号
 
     desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
 

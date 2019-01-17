@@ -9,13 +9,12 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 
-public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmuView {
+public class SimpleClickDanmuView extends SimpleBaseDanmuView implements ISimpleDanmuView {
 
     private boolean fromUp2Down = true;
     private int speed;
@@ -23,15 +22,15 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
     private boolean oneByOneEnter = true;
     private Handler mHandler;
 
-    public SimpleDanmuView(@NonNull Context context) {
+    public SimpleClickDanmuView(@NonNull Context context) {
         this(context, null);
     }
 
-    public SimpleDanmuView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public SimpleClickDanmuView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SimpleDanmuView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SimpleClickDanmuView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initData(context);
     }
@@ -53,7 +52,7 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
                 } else {
                     layoutParams.topMargin = (rowCount - row) * dp2px(rowDistance + everyRowHeight);
                 }
-                simpleItemBaseView.setTranslationX(getMeasuredWidth());
+                layoutParams.leftMargin = getMeasuredWidth();
                 startScrollView(simpleItemBaseView);
                 addView(simpleItemBaseView, layoutParams);
                 super.startItemDanmuView(simpleItemBaseView);
@@ -70,6 +69,7 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
         simpleItemBaseView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
+                Log.d("SimpleClickDanmuView", "simpleItemBaseView.getWidth():" + simpleItemBaseView.getWidth());
                 simpleItemBaseView.getViewTreeObserver().removeOnPreDrawListener(this);
                 if (mHandler != null) {
                     mHandler.post(new Runnable() {
@@ -87,9 +87,10 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
 
     private void startAnimation(final SimpleItemBaseView simpleItemBaseView) {
         int width = simpleItemBaseView.getWidth();
+        Log.d("SimpleClickDanmuView", "width:" + width);
         int startMargin = getMeasuredWidth();
         int endMargin = -width;
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) simpleItemBaseView.getLayoutParams();
+        LayoutParams layoutParams = (LayoutParams) simpleItemBaseView.getLayoutParams();
         layoutParams.width = width;
         simpleItemBaseView.setLayoutParams(layoutParams);
         ValueAnimator valueAnimator = ValueAnimator.ofInt(startMargin, endMargin);
@@ -105,8 +106,13 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 if (currentState == RUNNING) {
+                    if (simpleItemBaseView.getVisibility() != VISIBLE) {
+                        simpleItemBaseView.setVisibility(VISIBLE);
+                    }
                     int value = (int) animation.getAnimatedValue();
-                    simpleItemBaseView.setTranslationX(value);
+                    LayoutParams layoutParams = (LayoutParams) simpleItemBaseView.getLayoutParams();
+                    layoutParams.leftMargin = value;
+                    simpleItemBaseView.setLayoutParams(layoutParams);
                     if (oneByOneEnter) {
                         if ((value <= getMeasuredWidth() - simpleItemBaseView.getWidth() - itemDistance) && simpleItemBaseView.getTag() == null) {
                             setNextIndicator(simpleItemBaseView.rowNumber, true);

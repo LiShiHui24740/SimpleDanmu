@@ -14,15 +14,14 @@
         android:layout_height="38dp"
         android:background="#FF0000"
         android:gravity="center"
-        android:text="send_danmu"
-        />
+        android:text="send_danmu" />
 
     <TextView
         android:id="@+id/id_welcome"
         android:layout_width="100dp"
         android:layout_height="38dp"
-        android:layout_toRightOf="@id/id_danmu"
         android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/id_danmu"
         android:background="#FF0000"
         android:gravity="center"
         android:text="send_welcome" />
@@ -33,9 +32,16 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true" />
 
+    <com.airland.simpledanmuku.widget.SimpleClickDanmuView
+        android:id="@+id/id_scd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_sd"
+        android:layout_centerVertical="true" />
+
     <com.airland.datastruct.SimpleWelcomeView
         android:id="@+id/id_sw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/id_sd" />
+        android:layout_below="@id/id_scd" />
 </RelativeLayout>
