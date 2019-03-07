@@ -7,6 +7,8 @@ public interface IMessageDeal<T extends AbstractMessage> {
 
     void endDealWithMessage();
 
+    void clearMessageQueue();
+
     void resumeDealWithMessage();
 
     void setNextIndicator(int row, boolean state);

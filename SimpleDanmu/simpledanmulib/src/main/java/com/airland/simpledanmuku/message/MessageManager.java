@@ -68,15 +68,15 @@ public class MessageManager<T extends AbstractMessage> {
     }
 
     private void insertMessage(T message) {
-        if (mQueue.size()>0){
+        if (mQueue.size() > 0) {
             AbstractMessage max = mQueue.getFirst();
             AbstractMessage min = mQueue.getLast();
-            if (message.mPriority>max.getPriority()){
+            if (message.mPriority > max.getPriority()) {
                 mQueue.addFirst(message);
-            }else{
-                if (message.mPriority<=min.getPriority()){
+            } else {
+                if (message.mPriority <= min.getPriority()) {
                     mQueue.addLast(message);
-                }else{
+                } else {
                     int size = mQueue.size();
                     boolean isFind = false;
                     for (int i = size - 1; i > 0; i++) {
@@ -92,12 +92,9 @@ public class MessageManager<T extends AbstractMessage> {
                     }
                 }
             }
-        }else{
+        } else {
             mQueue.addLast(message);
         }
-
-
-
     }
 
 
@@ -114,6 +111,17 @@ public class MessageManager<T extends AbstractMessage> {
             mMessageDispatchMessage = null;
         }
 
+    }
+
+    void clearQueue() {
+        ReentrantLock currentlock = lock;
+        try {
+            currentlock.lock();
+            mQueue.clear();
+            notEmpty.signal();
+        } finally {
+            currentlock.unlock();
+        }
     }
 
     private class TakeMessageThread extends Thread {
@@ -142,14 +150,14 @@ public class MessageManager<T extends AbstractMessage> {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     if (currentlock.isLocked())
-                    currentlock.unlock();
+                        currentlock.unlock();
                 }
             }
         }
     }
 
     void setIndicator(int row, boolean state) {
-        if (iStateJudge!=null){
+        if (iStateJudge != null) {
             ReentrantLock currentlock = lock;
             try {
                 currentlock.lock();

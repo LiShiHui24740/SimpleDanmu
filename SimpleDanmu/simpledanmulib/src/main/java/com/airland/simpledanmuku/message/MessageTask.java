@@ -38,6 +38,11 @@ public final class MessageTask<T extends AbstractMessage> implements IMessageDea
     }
 
     @Override
+    public void clearMessageQueue() {
+        messageManager.clearQueue();
+    }
+
+    @Override
     public void setNextIndicator(int row, boolean state) {
         messageManager.setIndicator(row, state);
     }

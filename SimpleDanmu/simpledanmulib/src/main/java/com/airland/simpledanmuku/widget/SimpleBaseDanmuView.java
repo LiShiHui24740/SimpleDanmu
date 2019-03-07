@@ -68,8 +68,8 @@ public abstract class SimpleBaseDanmuView extends FrameLayout implements ISimple
         if (this.iSimpleMessageAdapter == null) {
             this.iSimpleMessageAdapter = iSimpleMessageAdapter;
             rowCount = iSimpleMessageAdapter.getRowCount();
-            if (rowCount>1)
-            simpleBaseViewRankImp = new SimpleBaseViewRankImp(rowCount);
+            if (rowCount > 1)
+                simpleBaseViewRankImp = new SimpleBaseViewRankImp(rowCount);
             iMessageDeal = new MessageTask<>(this, iSimpleMessageAdapter, !isEnableOverLayer ? new DefautJudgeManager(rowCount) : null);
         }
     }
@@ -106,7 +106,7 @@ public abstract class SimpleBaseDanmuView extends FrameLayout implements ISimple
                     }
                 }
             }
-        }else{
+        } else {
             if (!isCalled) {
                 if (iMessageDeal != null) {
                     iMessageDeal.setNextIndicator(simpleItemBaseView.rowNumber, true);
@@ -132,9 +132,24 @@ public abstract class SimpleBaseDanmuView extends FrameLayout implements ISimple
         }
     }
 
+    protected void resetNextIndicator(int row, boolean state) {
+        if (iMessageDeal != null) {
+            iMessageDeal.setNextIndicator(row, state);
+        }
+    }
+
+    protected void resetNextIndicator(boolean state) {
+        resetNextIndicator(1, state);
+    }
+
     public void endDealWithMessage() {
         if (iMessageDeal != null)
             iMessageDeal.endDealWithMessage();
+    }
+
+    public void clearMessageQueue() {
+        if (iMessageDeal != null)
+            iMessageDeal.clearMessageQueue();
     }
 
     public void resumeDealWithMessage() {
