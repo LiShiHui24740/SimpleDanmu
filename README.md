@@ -11,32 +11,37 @@
 ```
 //先在gradle中添加依赖  
 
-compile 'com.github.airland:simpledanmu:1.0.6'
+compile 'com.github.airland:simpledanmu:1.0.7'
 ```
 接着布局文件中：   
 ```
-<com.airland.simpledanmuku.widget.SimpleDanmuView
+  <com.airland.simpledanmuku.widget.SimpleDanmuView
         android:id="@+id/id_sd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        app:rowCount="1"
+        app:isEnableOverLayer="false"
+        app:oneByOneEnter="true"
+        />
 ```
 # 简单用法
 在Activity中,和使用ListView类似，首先findview然后给view设置adapter，这里的adapter要传入泛型，也就是弹幕上数据的bean对象，这个bean要继承AbstractMessage例如下面例子中的TestMessage，getView返回的则是对应的弹幕view：  
 ```
  SimpleDanmuView simpleDanmuView = findViewById(R.id.id_sd);
- simpleDanmuView.setMessageAdapter(new ISimpleMessageAdapter<TestMessage>() {
+ simpleDanmuView.setMessageAdapter(new ISimpleMessageAdapter<AbstractMessage>() {
             @Override
-            public int getRowCount() {
-                return 1;//弹幕有几个轨道
-            }
+            public SimpleItemBaseView getView(AbstractMessage testMessage) {
+                if (testMessage.getMsgType()==1){
+                    SimpleItemPictureView simpleItemPictureView = new SimpleItemPictureView(MainActivity.this);
+                    simpleItemPictureView.getContentView().setText(((TestMessage)testMessage.getBean()).getContent());
+                    return simpleItemPictureView;
+                }else{
+                    SimpleItemTextView simpleItemTextView = new SimpleItemTextView(MainActivity.this);
+                    simpleItemTextView.getTextView().setText(((TestMessage)testMessage.getBean()).getContent());
+                    return simpleItemTextView;
+                }
 
-            @Override
-            public SimpleItemBaseView getView(TestMessage testMessage) {
-                //弹幕view
-                SimpleItemPictureView simpleItemPictureView = new SimpleItemPictureView(MainActivity.this);
-                simpleItemPictureView.getContentView().setText(testMessage.getContent());
-                return simpleItemPictureView;
             }
         });
 //在destory的时候调用endDealWithMessage释放资源
