@@ -2,6 +2,7 @@ package com.airland.simpledanmuku.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -13,6 +14,12 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
+
+import com.airland.simpledanmuku.R;
+import com.airland.simpledanmuku.widget.base.ISimpleBaseViewRank;
+import com.airland.simpledanmuku.widget.base.ISimpleDanmuView;
+import com.airland.simpledanmuku.widget.base.SimpleBaseDanmuView;
+import com.airland.simpledanmuku.widget.base.SimpleItemBaseView;
 
 public class SimpleClickDanmuView extends SimpleBaseDanmuView implements ISimpleDanmuView {
 
@@ -32,11 +39,21 @@ public class SimpleClickDanmuView extends SimpleBaseDanmuView implements ISimple
 
     public SimpleClickDanmuView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SimpleDanmuView);
+        fromUp2Down = a.getBoolean(R.styleable.SimpleDanmuView_fromUp2Down, true);
+        oneByOneEnter = a.getBoolean(R.styleable.SimpleDanmuView_oneByOneEnter, true);
+        isEnableOverLayer = a.getBoolean(R.styleable.SimpleDanmuView_isEnableOverLayer, false);
+        speed = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_speed, dp2px(70));
+        rowCount = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_rowCount, 1);
+        rowDistance = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_rowDistance, dp2px(5));
+        itemDistance = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_itemDistance, dp2px(8));
+        everyRowHeight = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_everyRowHeight, dp2px(40));
+        itemDuration = a.getInteger(R.styleable.SimpleDanmuView_itemDuration, 0);
+        a.recycle();
         initData(context);
     }
 
     private void initData(Context context) {
-        speed = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, context.getResources().getDisplayMetrics());
         mHandler = new Handler(Looper.getMainLooper());
     }
 

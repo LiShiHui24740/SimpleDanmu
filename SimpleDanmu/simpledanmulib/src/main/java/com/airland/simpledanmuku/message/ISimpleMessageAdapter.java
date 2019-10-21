@@ -1,9 +1,8 @@
 package com.airland.simpledanmuku.message;
 
 
-import com.airland.simpledanmuku.widget.SimpleItemBaseView;
+import com.airland.simpledanmuku.widget.base.SimpleItemBaseView;
 
 public interface ISimpleMessageAdapter<T extends AbstractMessage>{
-    int getRowCount();
     SimpleItemBaseView getView(T t);
 }

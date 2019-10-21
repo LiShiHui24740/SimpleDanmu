@@ -1,10 +1,8 @@
 package com.airland.simpledanmuku.message;
 
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 
 import com.airland.simpledanmuku.judge.IStateJudge;
 
@@ -58,11 +56,14 @@ public class MessageManager<T extends AbstractMessage> {
         if (flag) {
             ReentrantLock currentlock = lock;
             try {
-                currentlock.lock();
+                currentlock.lockInterruptibly();
                 insertMessage(message);
                 notEmpty.signal();
+            } catch (Exception e) {
+                e.printStackTrace();
             } finally {
-                currentlock.unlock();
+                if (currentlock.isHeldByCurrentThread())
+                    currentlock.unlock();
             }
         }
     }
@@ -79,7 +80,7 @@ public class MessageManager<T extends AbstractMessage> {
                 } else {
                     int size = mQueue.size();
                     boolean isFind = false;
-                    for (int i = size - 1; i > 0; i++) {
+                    for (int i = size - 1; i > 0; i--) {
                         AbstractMessage abstractMessage = mQueue.get(i);
                         if (abstractMessage.mPriority >= message.mPriority) {
                             isFind = true;
@@ -116,18 +117,21 @@ public class MessageManager<T extends AbstractMessage> {
     void clearQueue() {
         ReentrantLock currentlock = lock;
         try {
-            currentlock.lock();
+            currentlock.lockInterruptibly();
             mQueue.clear();
             notEmpty.signal();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
-            currentlock.unlock();
+            if (currentlock.isHeldByCurrentThread())
+                currentlock.unlock();
         }
     }
 
     private class TakeMessageThread extends Thread {
         @Override
         public void run() {
-            while (flag) {
+            while (flag && !isInterrupted()) {
                 ReentrantLock currentlock = lock;
                 try {
                     currentlock.lockInterruptibly();
@@ -142,14 +146,16 @@ public class MessageManager<T extends AbstractMessage> {
                             message1.sendToTarget();
                             mQueue.removeFirst();
                         }
-                        currentlock.unlock();
+                        if (currentlock.isHeldByCurrentThread())
+                            currentlock.unlock();
                     } else {
-                        currentlock.unlock();
+                        if (currentlock.isHeldByCurrentThread())
+                            currentlock.unlock();
                         Thread.sleep(200);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    if (currentlock.isLocked())
+                    if (currentlock.isHeldByCurrentThread())
                         currentlock.unlock();
                 }
             }
@@ -160,11 +166,13 @@ public class MessageManager<T extends AbstractMessage> {
         if (iStateJudge != null) {
             ReentrantLock currentlock = lock;
             try {
-                currentlock.lock();
-                if (iStateJudge != null)
-                    iStateJudge.setIndicator(row, state);
+                currentlock.lockInterruptibly();
+                iStateJudge.setIndicator(row, state);
+            } catch (Exception e) {
+                e.printStackTrace();
             } finally {
-                currentlock.unlock();
+                if (currentlock.isHeldByCurrentThread())
+                    currentlock.unlock();
             }
         }
 

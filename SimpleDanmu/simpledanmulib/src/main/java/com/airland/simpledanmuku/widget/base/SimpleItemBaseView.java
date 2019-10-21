@@ -1,4 +1,4 @@
-package com.airland.simpledanmuku.widget;
+package com.airland.simpledanmuku.widget.base;
 
 import android.content.Context;
 import android.util.TypedValue;
@@ -7,9 +7,9 @@ import android.widget.RelativeLayout;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 
-public class SimpleItemBaseView extends RelativeLayout {
+public abstract class SimpleItemBaseView extends RelativeLayout {
 
-    protected int rowNumber = 1;
+    public int rowNumber = 1;
 
     public SimpleItemBaseView(Context context) {
         super(context);

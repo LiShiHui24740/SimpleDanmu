@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.airland.simpledanmuku.widget.SimpleItemBaseView;
+import com.airland.simpledanmuku.widget.base.SimpleItemBaseView;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.airland.simpledanmuku.widget;
+package com.airland.simpledanmuku.customview;
 
 import android.content.Context;
 import android.graphics.Bitmap;

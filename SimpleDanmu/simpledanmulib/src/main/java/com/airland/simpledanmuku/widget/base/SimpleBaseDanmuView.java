@@ -1,4 +1,4 @@
-package com.airland.simpledanmuku.widget;
+package com.airland.simpledanmuku.widget.base;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -67,7 +67,6 @@ public abstract class SimpleBaseDanmuView extends FrameLayout implements ISimple
     public <T extends AbstractMessage> void setMessageAdapter(ISimpleMessageAdapter<T> iSimpleMessageAdapter) {
         if (this.iSimpleMessageAdapter == null) {
             this.iSimpleMessageAdapter = iSimpleMessageAdapter;
-            rowCount = iSimpleMessageAdapter.getRowCount();
             if (rowCount > 1)
                 simpleBaseViewRankImp = new SimpleBaseViewRankImp(rowCount);
             iMessageDeal = new MessageTask<>(this, iSimpleMessageAdapter, !isEnableOverLayer ? new DefautJudgeManager(rowCount) : null);
@@ -121,10 +120,19 @@ public abstract class SimpleBaseDanmuView extends FrameLayout implements ISimple
         return currentState;
     }
 
+    /**
+     * 设置弹幕是否可以重叠覆盖在上面
+     * @param enableOverLayer
+     */
     public void setEnableOverLayer(boolean enableOverLayer) {
         isEnableOverLayer = enableOverLayer;
     }
 
+    /**
+     * 设置下一个弹幕是否可以显示了
+     * @param row
+     * @param state
+     */
     protected void setNextIndicator(int row, boolean state) {
         if (iMessageDeal != null) {
             isCalled = true;

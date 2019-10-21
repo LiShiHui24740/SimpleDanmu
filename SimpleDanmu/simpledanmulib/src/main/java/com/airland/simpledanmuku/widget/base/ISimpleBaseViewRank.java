@@ -1,4 +1,4 @@
-package com.airland.simpledanmuku.widget;
+package com.airland.simpledanmuku.widget.base;
 
 public interface ISimpleBaseViewRank<T> {
     void insertRowItem(T t);

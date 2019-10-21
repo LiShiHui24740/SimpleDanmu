@@ -2,25 +2,30 @@ package com.airland.simpledanmuku.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 
+import com.airland.simpledanmuku.R;
+import com.airland.simpledanmuku.widget.base.ISimpleBaseViewRank;
+import com.airland.simpledanmuku.widget.base.ISimpleDanmuView;
+import com.airland.simpledanmuku.widget.base.SimpleBaseDanmuView;
+import com.airland.simpledanmuku.widget.base.SimpleItemBaseView;
+
 public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmuView {
 
-    private boolean fromUp2Down = true;
+    private boolean fromUp2Down;
     private int speed;
     private long itemDuration;
-    private boolean oneByOneEnter = true;
+    private boolean oneByOneEnter;
     private Handler mHandler;
 
     public SimpleDanmuView(@NonNull Context context) {
@@ -33,11 +38,21 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
 
     public SimpleDanmuView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initData(context);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SimpleDanmuView);
+        fromUp2Down = a.getBoolean(R.styleable.SimpleDanmuView_fromUp2Down, true);
+        oneByOneEnter = a.getBoolean(R.styleable.SimpleDanmuView_oneByOneEnter, true);
+        isEnableOverLayer = a.getBoolean(R.styleable.SimpleDanmuView_isEnableOverLayer, false);
+        speed = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_speed, dp2px(70));
+        rowDistance = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_rowDistance, dp2px(5));
+        itemDistance = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_itemDistance, dp2px(8));
+        everyRowHeight = a.getDimensionPixelSize(R.styleable.SimpleDanmuView_everyRowHeight, dp2px(40));
+        itemDuration = a.getInteger(R.styleable.SimpleDanmuView_itemDuration, 0);
+        rowCount = a.getInteger(R.styleable.SimpleDanmuView_rowCount, 1);
+        a.recycle();
+        initData();
     }
 
-    private void initData(Context context) {
-        speed = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, context.getResources().getDisplayMetrics());
+    private void initData() {
         mHandler = new Handler(Looper.getMainLooper());
     }
 
@@ -47,11 +62,11 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
         if (simpleItemBaseView != null && currentState == RUNNING) {
             int row = simpleItemBaseView.rowNumber;
             if (row <= rowCount) {
-                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp2px(everyRowHeight));
+                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,everyRowHeight);
                 if (fromUp2Down) {
-                    layoutParams.topMargin = (row - 1) * dp2px(rowDistance + everyRowHeight);
+                    layoutParams.topMargin = (row - 1) *(rowDistance + everyRowHeight);
                 } else {
-                    layoutParams.topMargin = (rowCount - row) * dp2px(rowDistance + everyRowHeight);
+                    layoutParams.topMargin = (rowCount - row) * (rowDistance + everyRowHeight);
                 }
                 simpleItemBaseView.setTranslationX(getMeasuredWidth());
                 startScrollView(simpleItemBaseView);
@@ -127,43 +142,50 @@ public class SimpleDanmuView extends SimpleBaseDanmuView implements ISimpleDanmu
 
     }
 
-    public void setOneByOneEnter(boolean oneByOneEnter) {
+    public SimpleDanmuView setOneByOneEnter(boolean oneByOneEnter) {
         this.oneByOneEnter = oneByOneEnter;
+        return this;
     }
 
 
-    public void setRowDistance(int rowDistance) {
+    public SimpleDanmuView setRowDistance(int rowDistance) {
         if (this.rowDistance != rowDistance) {
             this.rowDistance = rowDistance;
             requestLayout();
         }
+        return this;
 
     }
 
-    public void setFromUp2Down(boolean fromUp2Down) {
+    public SimpleDanmuView setFromUp2Down(boolean fromUp2Down) {
         this.fromUp2Down = fromUp2Down;
+        return this;
     }
 
-    public void setDanmuViewHeight(int everyRowHeight) {
+    public SimpleDanmuView setDanmuViewHeight(int everyRowHeight) {
         if (this.everyRowHeight != everyRowHeight) {
             this.everyRowHeight = everyRowHeight;
             requestLayout();
         }
+        return this;
     }
 
-    public void setISimpleBaseViewRank(ISimpleBaseViewRank iSimpleBaseViewRank) {
+    public SimpleDanmuView setSimpleBaseViewRank(ISimpleBaseViewRank iSimpleBaseViewRank) {
         this.simpleBaseViewRankImp = simpleBaseViewRankImp;
+        return this;
     }
 
-    public void setSpeed(int speedDp) {
+    public SimpleDanmuView setSpeed(int speedDp) {
         this.speed = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, speedDp, getContext().getResources().getDisplayMetrics());
         this.itemDuration = 0;
+        return this;
     }
 
-    public void setItemDuration(long itemDuration) {
+    public SimpleDanmuView setItemDuration(long itemDuration) {
         this.itemDuration = itemDuration;
         this.speed = 0;
         setEnableOverLayer(true);
+        return this;
     }
 
     public void stop() {

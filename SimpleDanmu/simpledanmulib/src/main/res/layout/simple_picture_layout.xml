@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <com.airland.simpledanmuku.widget.SimpleCircleImageView
+    <com.airland.simpledanmuku.customview.SimpleCircleImageView
         android:id="@+id/id_civ_headpic"
         android:layout_width="38dp"
         android:layout_height="match_parent"

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SimpleDanmuView">
+        //弹幕添加是从上到下
+        <attr name="fromUp2Down" format="boolean" />
+        //弹幕滚动速度，每秒滚动多少距离
+        <attr name="speed" format="dimension" />
+        //弹幕是否是逐个出现
+        <attr name="oneByOneEnter" format="boolean" />
+        //弹幕是有多少行，相当于多少个飘弹幕的轨道
+        <attr name="rowCount" format="integer" />
+        //弹幕行间距
+        <attr name="rowDistance" format="dimension" />
+        //弹幕是否是逐个出现时候两个弹幕之间的间隔不小于多少
+        <attr name="itemDistance" format="dimension" />
+        //弹幕是否可以重叠
+        <attr name="isEnableOverLayer" format="boolean" />
+        //单个弹幕的高度
+        <attr name="everyRowHeight" format="dimension" />
+        //每个弹幕滚动完耗时多少，这个和speed互斥
+        <attr name="itemDuration" format="integer" />
+    </declare-styleable>
+</resources>

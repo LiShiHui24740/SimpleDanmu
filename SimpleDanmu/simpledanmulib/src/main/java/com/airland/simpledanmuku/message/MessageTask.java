@@ -1,8 +1,8 @@
 package com.airland.simpledanmuku.message;
 
 import com.airland.simpledanmuku.judge.IStateJudge;
-import com.airland.simpledanmuku.widget.ISimpleDanmuView;
-import com.airland.simpledanmuku.widget.SimpleItemBaseView;
+import com.airland.simpledanmuku.widget.base.ISimpleDanmuView;
+import com.airland.simpledanmuku.widget.base.SimpleItemBaseView;
 
 
 

@@ -1,4 +1,4 @@
-package com.airland.simpledanmuku.widget;
+package com.airland.simpledanmuku.widget.itemviews;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.airland.simpledanmuku.R;
+import com.airland.simpledanmuku.widget.base.SimpleItemBaseView;
 
 
 public class SimpleItemPictureView extends SimpleItemBaseView {

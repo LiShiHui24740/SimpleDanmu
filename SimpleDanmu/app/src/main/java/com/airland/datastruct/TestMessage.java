@@ -1,6 +1,5 @@
 package com.airland.datastruct;
 
-import com.airland.simpledanmuku.message.AbstractMessage;
 
 /**
  * @author AirLand
@@ -10,7 +9,7 @@ import com.airland.simpledanmuku.message.AbstractMessage;
  * @gitHub https://github.com/LiShiHui24740
  * @describe:
  */
-public class TestMessage extends AbstractMessage {
+public class TestMessage{
     private String content;
 
     public String getContent() {

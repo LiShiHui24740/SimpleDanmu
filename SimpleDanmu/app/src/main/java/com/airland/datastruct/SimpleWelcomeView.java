@@ -13,8 +13,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 
-import com.airland.simpledanmuku.widget.SimpleBaseDanmuView;
-import com.airland.simpledanmuku.widget.SimpleItemBaseView;
+import com.airland.simpledanmuku.widget.base.SimpleBaseDanmuView;
+import com.airland.simpledanmuku.widget.base.SimpleItemBaseView;
 
 /**
  * @author AirLand

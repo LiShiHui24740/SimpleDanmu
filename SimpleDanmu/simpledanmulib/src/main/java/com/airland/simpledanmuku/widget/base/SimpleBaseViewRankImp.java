@@ -1,4 +1,4 @@
-package com.airland.simpledanmuku.widget;
+package com.airland.simpledanmuku.widget.base;
 
 import android.util.SparseArray;
 

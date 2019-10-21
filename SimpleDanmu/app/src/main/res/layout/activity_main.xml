@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/id_fl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,18 +30,13 @@
         android:id="@+id/id_sd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true" />
-
-    <com.airland.simpledanmuku.widget.SimpleClickDanmuView
-        android:id="@+id/id_scd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/id_sd"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        app:rowCount="2"
+        />
 
     <com.airland.datastruct.SimpleWelcomeView
         android:id="@+id/id_sw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/id_scd" />
+        android:layout_below="@id/id_sd" />
 </RelativeLayout>
